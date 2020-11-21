@@ -1,0 +1,45 @@
+01.Logger
+Write a logging library for logging messages.
+
+Library Architecture
+The library should have the following components:
+•Layouts - define the format in which messages should be appended
+•Appenders - responsible for appending the messages somewhere
+•Loggers - hold methods for various kinds of logging
+Whenever a logger is told to log something, it calls all of its appenders and tells them to append the message. 
+In turn, the appenders append the message according to the layout they have.
+
+Requirements
+Your library should correctly follow all of the SOLID principles:
+•Single Responsibility Principle - no class or method should do more than one thing at once
+•Open-Closed Principle - the library should be open for extension
+•Liskov Substitution Principle - children classes should not break the behavior of their parent
+•Interface Segregation Principle - the library should provide simple interfaces for the client to implement
+•Dependency Inversion - no class/method should directly depend on concretions (only on abstractions)
+
+Implementations
+The library should provide the following ready classes for the client:
+•SimpleLayout - defines the format "<date-time> - <report level> - <message>"
+•ConsoleAppender - appends a log to the console, using the provided layout
+•FileAppender - appends a log to a file, using the provided layout
+•LogFile - a custom file class, which logs messages, using a method Write(). 
+It should have a getter for its size, which is the sum of the ascii codes of all alphabet characters it contains (e.g. a-z and A-Z)
+•Logger - a logger class, which is used to log messages. 
+Calls each of its appenders when something needs to be logged.
+
+Extensibility
+The end-user should be able to add his own layouts/appenders/loggers and use them.
+
+Report Threshold
+Implement a report level threshold in all appenders. 
+The appender should append only messages with report level above or equal to its report level threshold (by default all messages are appended). 
+The report level is in the order Info > Warning > Error > Critical > Fatal.
+
+LogFile
+A file should write all messages internally and it should keep information about its size.
+Size of a file is calculated by summing ASCII codes of all alphabet characters (a-Z).
+
+Command Interpreter
+Implement a Command Interpreter, which reads all appenders that a Logger will have and input messages from the console. 
+Every message should be evaluated by all the appenders and logged, if they meet the report level. 
+Console appenders should write directly on the console. File appenders write (save) the messages, but do not print them.
